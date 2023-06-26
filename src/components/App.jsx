@@ -1,36 +1,35 @@
-import React, { Component } from "react";
-import { Statistics } from "./Statistics";
-import { FeedbackOptions } from "./FeedbackOptions";
-import { Section } from "./Section";
-
+import React, { Component } from 'react';
+import { Statistics } from './Statistics/Statistics';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Section } from './Section/Section';
 
 export class App extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0
-  }
+    bad: 0,
+  };
 
+  addFeedback = event => {
+    this.setState(prevState => ({
+      ...this.state,
+      [event.target.name]: prevState[event.target.name] + 1,
+    }));
+  };
 
-  addFeedback = (event) => {
-    this.setState((prevState) => ({ ...this.state, [event.target.name] :  prevState[event.target.name]+1}))
-  }
-  
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state
-    return Number([good]) + Number([neutral]) + Number([bad])
-  }
-  
+    const { good, neutral, bad } = this.state;
+    return Number([good]) + Number([neutral]) + Number([bad]);
+  };
+
   countPositiveFeedbackPercentage = () => {
     const { good, neutral, bad } = this.state;
     const total = Number([good]) + Number([neutral]) + Number([bad]);
-    const goodFeedback = Math.floor(((Number([good]) / total) * 100))
-    return goodFeedback ? goodFeedback : 0
-  }
+    const goodFeedback = Math.floor((Number([good]) / total) * 100);
+    return goodFeedback ? goodFeedback : 0;
+  };
 
-  renderSection = () => {
-    
-  }
+  renderSection = () => {};
 
   render() {
     return (
@@ -53,5 +52,5 @@ export class App extends Component {
         </Section>
       </>
     );
-  };
+  }
 }
